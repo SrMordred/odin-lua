@@ -383,8 +383,8 @@ lua_insert :: proc (L: ^lua_State ,idx:int)
 
 lua_remove :: proc (L: ^lua_State ,idx: int)
 {	
-	lua_rotate(L, (idx), -1)
-	;lua_pop(L, 1);
+	lua_rotate(L, (idx), -1);
+	lua_pop(L, 1);
 }
 
 lua_replace :: proc (L: ^lua_State ,idx: int)	
