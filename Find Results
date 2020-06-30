@@ -1,0 +1,47 @@
+Searching 184 files for "lua_Integer"
+
+C:\Users\Patric\Desktop\odin\odin_lua\lua.odin:
+   73  	lua_rawequal :: proc (L: ^lua_State ,  idx1: c_int,  idx2: c_int) -> c_int ---;
+   74  	lua_rawget :: proc (L: ^lua_State , idx: c_int ) -> c_int ---;
+   75: 	lua_rawgeti :: proc (L: ^lua_State , idx: c_int , n: lua_Integer) -> c_int ---;
+   76  	lua_rawgetp :: proc (L: ^lua_State , idx: c_int , p: rawptr) -> c_int ---;
+   77  	lua_rawlen :: proc (L: ^lua_State , idx: c_int ) -> c_ptrdiff_t ---;
+   78  	lua_rawset :: proc (L: ^lua_State , idx: c_int ) ---;
+   79: 	lua_rawseti :: proc (L: ^lua_State , idx: c_int , n: lua_Integer) ---;
+   80  	lua_rawsetp :: proc (L: ^lua_State , idx: c_int , p: rawptr) ---;
+   81  	lua_resume :: proc (L: ^lua_State , from: ^lua_State, narg: c_int) -> c_int ---;
+   ..
+   85  	lua_setglobal :: proc (L: ^lua_State , name: cstring) ---;
+   86  	lua_sethook :: proc (L: ^lua_State , func: lua_Hook , mask: c_int, count: c_int ) ---;
+   87: 	lua_seti :: proc (L: ^lua_State , idx: c_int , n: lua_Integer) ---;
+   88  	lua_setlocal :: proc (L: ^lua_State , ar: ^lua_Debug , n: c_int) -> cstring ---;
+   89  	lua_setmetatable :: proc (L: ^lua_State , objindex: c_int ) -> c_int ---;
+   ..
+   96  	lua_toboolean :: proc (L: ^lua_State , idx: c_int ) -> c_int ---;
+   97  	lua_tocfunction :: proc (L: ^lua_State , idx: c_int ) -> lua_CFunction ---;
+   98: 	lua_tointegerx :: proc (L: ^lua_State , idx: c_int , isnum: ^c_int) -> lua_Integer ---;
+   99  	lua_tolstring :: proc (L: ^lua_State , idx: c_int , len: ^c_ptrdiff_t) -> cstring ---;
+  100  	lua_tonumberx :: proc (L: ^lua_State , idx: c_int , isnum: ^c_int) -> lua_Number ---;
+  ...
+  112  	luaL_callmeta :: proc (L: ^lua_State , obj: c_int , e: cstring ) -> c_int ---;
+  113  	luaL_checkany :: proc (L: ^lua_State , arg: c_int) ---;
+  114: 	luaL_checkinteger :: proc (L: ^lua_State , arg: c_int) -> lua_Integer ---;
+  115  	luaL_checklstring :: proc (L: ^lua_State , arg: c_int , l: ^c_ptrdiff_t)-> cstring ---;
+  116  	luaL_checknumber :: proc (L: ^lua_State , arg: c_int ) -> lua_Number ---;
+  ...
+  125  	luaL_getsubtable :: proc (L: ^lua_State , idx: c_int , fname: cstring) -> c_int ---;
+  126  	luaL_gsub :: proc (L : ^lua_State, s: cstring, p: cstring, r: cstring) -> cstring ---;
+  127: 	luaL_len :: proc (L: ^lua_State , idx: c_int ) -> lua_Integer ---;
+  128  	luaL_loadbufferx :: proc (L: ^lua_State , buff: cstring, sz: c_ptrdiff_t , name: cstring, mode: cstring) -> c_int ---;
+  129  	luaL_loadfilex :: proc (L: ^lua_State , filename: cstring, mode: cstring) -> c_int ---;
+  ...
+  132  	luaL_newstate :: proc () -> ^lua_State ---;
+  133  	luaL_openlibs :: proc (L: ^lua_State) ---;
+  134: 	luaL_optinteger :: proc (L: ^lua_State , arg: c_int,def: lua_Integer ) -> lua_Integer ---;
+  135  	luaL_optlstring :: proc (L: ^lua_State , arg: c_int , def: cstring, l: ^c_ptrdiff_t) -> cstring ---;
+  136  	luaL_optnumber :: proc (L: ^lua_State , arg: c_int , def:lua_Number) -> lua_Number ---;
+
+<untitled 249>:
+    <binary>
+
+16 matches across 2 files
