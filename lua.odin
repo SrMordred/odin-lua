@@ -3,9 +3,9 @@ package lua;
 import "core:os"
 import "core:c"
 
-when os.OS == "windows" do foreign import lua "system:lua53.lib";
-when os.OS == "linux" do foreign import lua "system:lua53";
-when os.OS == "darwin" do foreign import lua "system:lua53";
+when os.OS == .Windows do foreign import lua "system:lua.lib";
+when os.OS == .Linux do foreign import lua "system:lua";
+when os.OS == .Darwin do foreign import lua "system:lua";
 
 @(default_calling_convention = "c")
 foreign lua {
@@ -129,7 +129,7 @@ foreign lua {
 	luaL_optnumber :: proc (L: ^lua_State , arg: c.int , def:lua_Number) -> lua_Number ---;
 	luaL_ref :: proc (L: ^lua_State , t: c.int ) -> c.int ---;
 	luaL_requiref :: proc (L: ^lua_State , modname: cstring, openf: lua_CFunction , glb: c.int ) ---;
-	luaL_setfuncs :: proc (L: ^lua_State , l: ^luaL_Reg, nup: c.int ) --- ;
+	luaL_setfuncs :: proc (L: ^lua_State , l: [^]luaL_Reg, nup: c.int ) --- ;
 	luaL_setmetatable :: proc (L: ^lua_State , tname: cstring) ---;
 	luaL_testudata :: proc (L: ^lua_State , ud: c.int , tname: cstring) -> rawptr ---;
 	luaL_tolstring :: proc (L: ^lua_State , idx: c.int , len: ^c.ptrdiff_t) -> cstring ---;
@@ -141,8 +141,8 @@ foreign lua {
 	CONSTANTS
 */
 LUA_VERSION_MAJOR ::	"5";
-LUA_VERSION_MINOR ::	"3";
-LUA_VERSION_NUM ::		503;
+LUA_VERSION_MINOR ::	"4";
+LUA_VERSION_NUM ::		504;
 LUA_VERSION_RELEASE ::	"5";
 
 LUA_VERSION ::	"Lua " + LUA_VERSION_MAJOR + "." + LUA_VERSION_MINOR;
@@ -153,9 +153,9 @@ LUA_AUTHORS ::	"R. Ierusalimschy, L. H. de Figueiredo, W. Celes";
 LUA_SIGNATURE :: "\x1bLua";
 LUA_MULTRET	:: (-1);
 
-LUA_NUMBER :: c.float;
-LUA_INTEGER :: c.longlong;
-LUA_KCONTEXT :: c.ptrdiff_t;
+LUA_NUMBER :: c.double
+LUA_INTEGER :: c.longlong
+LUA_KCONTEXT :: c.ptrdiff_t
 LUA_IDSIZE :: 60;
 LUA_UNSIGNED :: u64;
 LUAI_MAXSTACK :: 1000000;
@@ -419,22 +419,22 @@ luaL_loadfile :: proc (L: ^lua_State,f: cstring)
 	luaL_loadfilex(L,f,nil);
 }
 
-luaL_checkversion :: proc (L: ^lua_State)
+luaL_checkversion :: proc "c" (L: ^lua_State)
 {
 	luaL_checkversion_(L, LUA_VERSION_NUM, LUAL_NUMSIZES);
 }
 
-// luaL_newlibtable :: proc (L:^ lua_State,l: ^luaL_Reg)
-// {
-// 	lua_createtable(L, 0, size_of(l)/size_of((l)[0]) - 1);
-// }
+luaL_newlibtable :: proc "c" (L: ^lua_State, l: []luaL_Reg)
+{
+	lua_createtable(L, 0, c.int(len(l) - 1));
+}
 
-// luaL_newlib :: proc (L:^ lua_State,l: ^luaL_Reg )
-// {
-// 	luaL_checkversion(L);
-// 	luaL_newlibtable(L,l);
-// 	luaL_setfuncs(L,l,0);
-// }
+luaL_newlib :: proc "c" (L:^ lua_State, l: []luaL_Reg)
+{
+    luaL_checkversion(L);
+    luaL_newlibtable(L, l);
+    luaL_setfuncs(L, &l[0], 0);
+}
 
 // luaL_argcheck :: (L:^ lua_State, cond,arg,extramsg)	\
 // 		((void)((cond) || luaL_argerror(L, (arg), (extramsg))))
