@@ -3,9 +3,9 @@ package lua;
 import "core:os"
 import "core:c"
 
-when os.OS == .Windows do foreign import lua "system:lua53.lib";
+when os.OS == .Windows do foreign import lua "system:lua.lib";
 when os.OS == .Linux do foreign import lua "system:lua";
-when os.OS == .Darwin do foreign import lua "system:lua53";
+when os.OS == .Darwin do foreign import lua "system:lua";
 
 @(default_calling_convention = "c")
 foreign lua {
